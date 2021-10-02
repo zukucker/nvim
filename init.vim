@@ -66,6 +66,4 @@ lua require'nvim-treesitter.configs'.setup {ensure_installed = "maintained"}
 
 " Load files for Lsp and completion
 luafile ~/.config/nvim/lua/compe-config.lua
-luafile ~/.config/nvim/lua/languages/tsserver.lua
-luafile ~/.config/nvim//lua/languages/html.lua
-luafile ~/.config/nvim/lua/languages/cssls.lua
+luafile ~/.config/nvim/lua/languages/languages.lua
