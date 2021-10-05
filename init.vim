@@ -8,6 +8,13 @@ call plug#begin()
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
+
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 " Styling
 Plug 'morhetz/gruvbox'
 Plug 'ap/vim-css-color'
@@ -29,6 +36,7 @@ let NERDTreeMinimalUI = 1
 nnoremap ,h :FZF<CR>
 nnoremap ,so :source $MYVIMRC<CR>
 nmap <F3> :e $MYVIMRC<CR>
+nmap <F4> :e $HOME/.config/nvim/lua/languages/languages.lua<CR>
 set laststatus=2
 set noswapfile
 set rnu
