@@ -35,7 +35,7 @@ nnoremap ,t :NERDTreeToggle<CR>
 let NERDTreeMinimalUI = 1
 nnoremap ,h :FZF<CR>
 nnoremap ,so :source $MYVIMRC<CR>
-nmap <F3> :e $MYVIMRC<CR>
+nmap <F3> :e $HOME/.config/nvim<CR>
 nmap <F4> :e $HOME/.config/nvim/lua/languages/languages.lua<CR>
 set laststatus=2
 set noswapfile
