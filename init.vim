@@ -15,8 +15,12 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'blueyed/smarty.vim'
+
+
 " Styling
 Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'ap/vim-css-color'
 " Assets
 Plug 'preservim/nerdcommenter'
@@ -30,8 +34,8 @@ call plug#end()
 
 
 set mouse=a
-colorscheme gruvbox
-nnoremap ,t :NERDTreeToggle<CR>
+colorscheme dracula
+noremap ,t :NERDTreeToggle<CR>
 let NERDTreeMinimalUI = 1
 nnoremap ,h :FZF<CR>
 nnoremap ,so :source $MYVIMRC<CR>
@@ -48,7 +52,7 @@ set expandtab
 set completeopt+=menuone
 set hlsearch
 set ignorecase
-set background=dark
+"set background=dark
 let g:rainbow_active = 1
 set guicursor="n-v-c-sm-i:block,ci-ve:ver25,r-cr-o:hor20"
 
