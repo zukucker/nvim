@@ -19,17 +19,18 @@ Plug 'blueyed/smarty.vim'
 
 
 " Styling
-Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'ap/vim-css-color'
+
 " Assets
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
-Plug 'junegunn/fzf'
+
 " Testing
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
 
@@ -37,7 +38,6 @@ set mouse=a
 colorscheme dracula
 noremap ,t :NERDTreeToggle<CR>
 let NERDTreeMinimalUI = 1
-nnoremap ,h :FZF<CR>
 nnoremap ,so :source $MYVIMRC<CR>
 nmap <F3> :e $HOME/.config/nvim<CR>
 nmap <F4> :e $HOME/.config/nvim/lua/languages/languages.lua<CR>
@@ -75,6 +75,13 @@ autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
 autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
 
 lua require'nvim-treesitter.configs'.setup {ensure_installed = "maintained"}
+
+" Telescope Setup
+nnoremap <leader>h <cmd>Telescope find_files<cr>
+nnoremap <leader>t <cmd>Telescope find_files<cr>
+nnoremap <leader>g <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " Load files for Lsp and completion
 luafile ~/.config/nvim/lua/compe-config.lua
