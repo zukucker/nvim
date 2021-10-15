@@ -33,9 +33,14 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
+" Load files for Lsp and completion
+luafile ~/.config/nvim/lua/compe-config.lua
+luafile ~/.config/nvim/lua/languages/languages.lua
+
+
+colorscheme dracula
 
 set mouse=a
-colorscheme dracula
 noremap ,t :NERDTreeToggle<CR>
 let NERDTreeMinimalUI = 1
 nnoremap ,so :source $MYVIMRC<CR>
@@ -53,7 +58,7 @@ set completeopt+=menuone
 set hlsearch
 set ignorecase
 "set background=dark
-let g:rainbow_active = 1
+"let g:rainbow_active = 1
 set guicursor="n-v-c-sm-i:block,ci-ve:ver25,r-cr-o:hor20"
 
 " add transparency to background in vim
@@ -73,16 +78,14 @@ nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
 autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
 autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
+autocmd BufWritePre *.php lua vim.lsp.buf.formatting_sync(nil, 100)
 
-lua require'nvim-treesitter.configs'.setup {ensure_installed = "maintained"}
+
+lua require'nvim-treesitter.configs'.setup { indent = { enable = true }, highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
 
 " Telescope Setup
 nnoremap <leader>h <cmd>Telescope find_files<cr>
-nnoremap <leader>t <cmd>Telescope find_files<cr>
 nnoremap <leader>g <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-" Load files for Lsp and completion
-luafile ~/.config/nvim/lua/compe-config.lua
-luafile ~/.config/nvim/lua/languages/languages.lua
