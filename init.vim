@@ -42,10 +42,12 @@ luafile ~/.config/nvim/lua/languages/languages.lua
 colorscheme dracula
 
 set mouse=a
-noremap ,t :NERDTreeToggle<CR>
+"noremap ,t :NERDTreeToggle<CR>
+noremap ,t :Telescope file_browser<CR>
 let NERDTreeMinimalUI = 1
 nnoremap ,so :source $MYVIMRC<CR>
-nmap <F3> :e $HOME/.config/nvim<CR>
+nmap <F3> :Telescope find_files cwd=~/.config/nvim<CR>
+"nmap <F3> :e ~/.config/nvim<CR>
 nmap <F4> :e $HOME/.config/nvim/lua/languages/languages.lua<CR>
 set laststatus=2
 set noswapfile
@@ -83,10 +85,10 @@ autocmd BufWritePre *.php lua vim.lsp.buf.formatting_sync(nil, 100)
 
 
 lua require'nvim-treesitter.configs'.setup { indent = { enable = true }, highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
-
+lua require('telescope').load_extension('fzf')
 " Telescope Setup
 nnoremap <leader>h <cmd>Telescope find_files<cr>
-nnoremap <leader>g <cmd>Telescope live_grep<cr>
+nnoremap <leader>rg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
