@@ -9,4 +9,4 @@ composer install
 sudo ln -sf ~/GIT/phpactor/bin/phpactor /usr/local/bin/phpactor
 
 #setup lsp for cssls, html etc.
-sudo npm i -g vscode-langservers-extracted
+sudo npm i -g vscode-langservers-extracted pyright
