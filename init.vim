@@ -47,7 +47,7 @@ luafile ~/.config/nvim/lua/languages/languages.lua
 
 
 colorscheme dracula
-
+set colorcolumn=80
 set mouse=a
 noremap ,t :NERDTreeToggle<CR>
 let NERDTreeMinimalUI = 1

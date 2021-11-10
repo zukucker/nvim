@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #nvim installation
-sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
-git clone https://github.com/neovim/neovim/ $HOME/GIT/
-cd $HOME/GIT/neovim/
-make
-sudo make install
+#sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
+#git clone https://github.com/neovim/neovim/ $HOME/GIT/
+#cd $HOME/GIT/neovim/
+#make
+#sudo make install
 
 
 
