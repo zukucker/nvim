@@ -8,16 +8,18 @@ call plug#begin()
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
-
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
+
 Plug 'blueyed/smarty.vim'
 Plug 'nelsyeung/twig.vim'
 
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
+
+Plug 'voldikss/vim-floaterm'
 
 " Styling
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -26,15 +28,13 @@ Plug 'ap/vim-css-color'
 " Assets
 Plug 'preservim/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-"Plug 'preservim/nerdtree'
 
 " Testing
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-
 Plug 'dstein64/vim-startuptime'
 
 " GTA STUFF
@@ -47,18 +47,23 @@ call plug#end()
 luafile ~/.config/nvim/lua/languages/languages.lua
 
 
+
 colorscheme dracula
 "coloscheme tokyonight
 let g:tmpl_search_paths = ['~/.config/nvim/templates']
 set list
 set listchars+=space:␣
 set mouse=a
-noremap ,nt :NERDTreeToggle<CR>
+noremap ,t :NERDTreeToggle<CR>
+noremap ,h :Files<CR>
+"noremap ,nt :FloatermNew<CR>
+nnoremap ,nt :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating<CR>
 noremap ,mm :CellularAutomaton make_it_rain<CR>
 "noremap ,t :Telescope file_browser<CR>
 let NERDTreeMinimalUI = 1
 nnoremap ,so :source $MYVIMRC<CR>
-nmap <F3> :Telescope find_files cwd=~/.config/nvim<CR>
+nmap <F3> :Files ~/.config/nvim<CR>
+"nmap <F3> :Telescope find_files cwd=~/.config/nvim<CR>
 "nmap <F3> :e ~/.config/nvim<CR>
 nmap <F4> :e $HOME/.config/nvim/lua/languages/languages.lua<CR>
 set laststatus=2
@@ -72,8 +77,6 @@ set expandtab
 set completeopt+=menuone
 set hlsearch
 set ignorecase
-"set background=dark
-"let g:rainbow_active = 1
 set guicursor="n-v-c-sm-i:block,ci-ve:ver25,r-cr-o:hor20"
 
 " add transparency to background in vim
@@ -90,24 +93,25 @@ nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 " auto-format
-autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.php lua vim.lsp.buf.formatting_sync(nil, 100)
+"autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
+"autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
+"autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
+"autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
+"autocmd BufWritePre *.php lua vim.lsp.buf.formatting_sync(nil, 100)
 
 
 lua require'nvim-treesitter.configs'.setup { indent = { enable = true }, highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
-lua require('telescope').load_extension('fzf')
+"lua require('telescope').load_extension('fzf')
 " Telescope Setup
-nnoremap <leader>t <cmd>Telescope find_files<cr>
-nnoremap <leader>rg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+"nnoremap <leader>h <cmd>Telescope find_files<cr>
+"nnoremap <leader>rg <cmd>Telescope live_grep<cr>
+"nnoremap <leader>fb <cmd>Telescope buffers<cr>
+"nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 "GTA STUFF
 nnoremap <leader>cfx <cmd>TemplateInit fxmanifest<cr>
-imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+nnoremap <leader>ch <cmd>TemplateInit html<cr>
+"imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+"smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 
 
 
