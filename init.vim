@@ -40,6 +40,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'tibabit/vim-templates'
 call plug#end()
 
 " Load files for Lsp and completion
@@ -47,6 +48,7 @@ luafile ~/.config/nvim/lua/compe-config.lua
 luafile ~/.config/nvim/lua/languages/languages.lua
 
 
+let g:tmpl_search_paths = ['~/.config/nvim/templates']
 colorscheme dracula
 set colorcolumn=80
 set mouse=a
@@ -70,7 +72,7 @@ set ignorecase
 "set background=dark
 "let g:rainbow_active = 1
 set guicursor="n-v-c-sm-i:block,ci-ve:ver25,r-cr-o:hor20"
-
+nnoremap <leader>cfx <cmd>TemplateInit fxmanifest<cr>
 " add transparency to background in vim
 hi Normal guibg=NONE ctermbg=NONE
 
