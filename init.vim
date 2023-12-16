@@ -27,7 +27,8 @@ Plug 'ap/vim-css-color'
 
 " Assets
 Plug 'preservim/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'nvim-tree/nvim-tree.lua'
+"Plug 'scrooloose/nerdtree'
 
 " Testing
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -54,7 +55,8 @@ let g:tmpl_search_paths = ['~/.config/nvim/templates']
 set list
 set listchars+=space:␣
 set mouse=a
-noremap ,t :NERDTreeToggle<CR>
+"noremap ,t :NERDTreeToggle<CR>
+noremap ,t :NvimTreeToggle<CR>
 noremap ,h :Files<CR>
 "noremap ,nt :FloatermNew<CR>
 nnoremap ,nt :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating<CR>
@@ -185,6 +187,17 @@ lua <<EOF
   require('lspconfig')['pyright'].setup {
     capabilities = capabilities
   }
+  require("nvim-tree").setup({
+  view = {
+    width = 30,
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
 EOF
 
 " Expand
