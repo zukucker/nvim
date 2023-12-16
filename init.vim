@@ -28,52 +28,38 @@ Plug 'ap/vim-css-color'
 " Assets
 Plug 'preservim/nerdcommenter'
 Plug 'nvim-tree/nvim-tree.lua'
-"Plug 'scrooloose/nerdtree'
 
 " Testing
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'dstein64/vim-startuptime'
 
 " GTA STUFF
 Plug 'tibabit/vim-templates'
-Plug 'Eandrju/cellular-automaton.nvim'
 call plug#end()
 
 " Load files for Lsp and completion
-"luafile ~/.config/nvim/lua/compe-config.lua
 luafile ~/.config/nvim/lua/languages/languages.lua
 
 
 
 colorscheme dracula
-"coloscheme tokyonight
 let g:tmpl_search_paths = ['~/.config/nvim/templates']
 set list
 set listchars+=space:␣
 set mouse=a
-"noremap ,t :NERDTreeToggle<CR>
 noremap ,t :NvimTreeToggle<CR>
 noremap ,h :Files<CR>
-"noremap ,nt :FloatermNew<CR>
-nnoremap ,nt :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating<CR>
-noremap ,mm :CellularAutomaton make_it_rain<CR>
-"noremap ,t :Telescope file_browser<CR>
+noremap ,r :RG<CR>
 let NERDTreeMinimalUI = 1
 nnoremap ,so :source $MYVIMRC<CR>
 nmap <F3> :Files ~/.config/nvim<CR>
-"nmap <F3> :Telescope find_files cwd=~/.config/nvim<CR>
-"nmap <F3> :e ~/.config/nvim<CR>
 nmap <F4> :e $HOME/.config/nvim/lua/languages/languages.lua<CR>
 set laststatus=2
 set noswapfile
 set rnu
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set expandtab
 :let mapleader = ","
 set completeopt+=menuone
@@ -94,26 +80,10 @@ nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
-" auto-format
-"autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
-"autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
-"autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
-"autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
-"autocmd BufWritePre *.php lua vim.lsp.buf.formatting_sync(nil, 100)
 
-
-lua require'nvim-treesitter.configs'.setup { indent = { enable = true }, highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
-"lua require('telescope').load_extension('fzf')
-" Telescope Setup
-"nnoremap <leader>h <cmd>Telescope find_files<cr>
-"nnoremap <leader>rg <cmd>Telescope live_grep<cr>
-"nnoremap <leader>fb <cmd>Telescope buffers<cr>
-"nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 "GTA STUFF
 nnoremap <leader>cfx <cmd>TemplateInit fxmanifest<cr>
 nnoremap <leader>ch <cmd>TemplateInit html<cr>
-"imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-"smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 
 
 
@@ -124,12 +94,8 @@ lua <<EOF
 
   cmp.setup({
     snippet = {
-      -- REQUIRED - you must specify a snippet engine
       expand = function(args)
         vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
     },
     window = {
@@ -146,9 +112,6 @@ lua <<EOF
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'vsnip' }, -- For vsnip users.
-      -- { name = 'luasnip' }, -- For luasnip users.
-      -- { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
     }, {
       { name = 'buffer' },
     })
