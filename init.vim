@@ -12,21 +12,27 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin()
-" LSP
-Plug 'neovim/nvim-lspconfig'
+" old LSP
 Plug 'hrsh7th/nvim-compe'
-
-Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
-
 Plug 'hrsh7th/nvim-cmp'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
+
+" shopware stuff
 Plug 'blueyed/smarty.vim'
+Plug 'nelsyeung/twig.vim'
+
+" fuzzy
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 
 " Styling
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'vim-airline/vim-airline'
 Plug 'ap/vim-css-color'
 
 " Assets
@@ -39,21 +45,41 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+"
+"
+"
+"
+"
+"
+"Testing stuff
+" LSP Support
+  "Plug 'neovim/nvim-lspconfig'             " Required
+  "Plug 'williamboman/mason.nvim'           " Optional
+  "Plug 'williamboman/mason-lspconfig.nvim' " Optional
+  "" Autocompletion
+  "Plug 'hrsh7th/nvim-cmp'         " Required
+  "Plug 'hrsh7th/cmp-nvim-lsp'     " Required
+  "Plug 'L3MON4D3/LuaSnip'         " Required
+  "Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
 call plug#end()
 
 " Load files for Lsp and completion
-luafile ~/.config/nvim/lua/compe-config.lua
+"luafile ~/.config/nvim/lua/compe-config.lua
 luafile ~/.config/nvim/lua/languages/languages.lua
 
+set rtp+=~/.config/nvim/twig-directory-plugin
 
 colorscheme dracula
 set colorcolumn=80
 set mouse=a
 noremap ,t :NERDTreeToggle<CR>
+noremap ,h :Files<CR>
+noremap ,rg :RG<CR>
 let NERDTreeMinimalUI = 1
 nnoremap ,so :source $MYVIMRC<CR>
 nmap <F3> :e $HOME/.config/nvim<CR>
 nmap <F4> :e $HOME/.config/nvim/lua/languages/languages.lua<CR>
+set scrolloff=7
 set laststatus=2
 set noswapfile
 set rnu
@@ -65,14 +91,11 @@ set expandtab
 set completeopt+=menuone
 set hlsearch
 set ignorecase
-"set background=dark
-"let g:rainbow_active = 1
 set guicursor="n-v-c-sm-i:block,ci-ve:ver25,r-cr-o:hor20"
-
-" add transparency to background in vim
+let NERDTreeShowHidden=1
 hi Normal guibg=NONE ctermbg=NONE
 
-" LSP config (the mappings used in the default file don't quite work right)
+" Remaps
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
@@ -81,19 +104,4 @@ nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-
-" auto-format
-autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.php lua vim.lsp.buf.formatting_sync(nil, 100)
-
-
-lua require'nvim-treesitter.configs'.setup { indent = { enable = true }, highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
-
-" Telescope Setup
-nnoremap <leader>h <cmd>Telescope find_files<cr>
-nnoremap <leader>g <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 

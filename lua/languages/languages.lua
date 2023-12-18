@@ -18,3 +18,9 @@ require'lspconfig'.tsserver.setup{}
 require'lspconfig'.pyright.setup{}
 
 require'lspconfig'.phpactor.setup{}
+
+require'lspconfig'.intelephense.setup{}
+
+vim.diagnostic.config({
+  virtual_text = false,
+})
