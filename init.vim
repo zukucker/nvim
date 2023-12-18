@@ -6,6 +6,7 @@ filetype indent off
 
 call plug#begin()
 " LSP
+Plug 'williamboman/mason.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -19,11 +20,10 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
-Plug 'voldikss/vim-floaterm'
-
 " Styling
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'navarasu/onedark.nvim'
 Plug 'ap/vim-css-color'
+Plug 'nvim-lualine/lualine.nvim'
 
 " Assets
 Plug 'preservim/nerdcommenter'
@@ -42,11 +42,12 @@ luafile ~/.config/nvim/lua/languages/languages.lua
 
 
 
-colorscheme dracula
+colorscheme onedark
 let g:tmpl_search_paths = ['~/.config/nvim/templates']
 set list
 set listchars+=space:␣
 set mouse=a
+set textwidth=80
 noremap ,t :NvimTreeToggle<CR>
 noremap ,h :Files<CR>
 noremap ,r :RG<CR>
@@ -65,21 +66,6 @@ set expandtab
 set completeopt+=menuone
 set hlsearch
 set ignorecase
-set guicursor="n-v-c-sm-i:block,ci-ve:ver25,r-cr-o:hor20"
-
-" add transparency to background in vim
-hi Normal guibg=NONE ctermbg=NONE
-
-" LSP config (the mappings used in the default file don't quite work right)
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-
 
 "GTA STUFF
 nnoremap <leader>cfx <cmd>TemplateInit fxmanifest<cr>
@@ -160,26 +146,15 @@ lua <<EOF
   filters = {
     dotfiles = true,
   },
+    -- See `:help lualine.txt`
 })
+require('lualine').setup{
+    options = {
+        icons_enabled = false,
+        theme = 'onedark',
+        component_separators = '|',
+        section_separators = '',
+    },
+}
+require("mason").setup()
 EOF
-
-" Expand
-imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-
-" Expand or jump
-imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-
-" Jump forward or backward
-imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-
-" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
-" See https://github.com/hrsh7th/vim-vsnip/pull/50
-nmap        s   <Plug>(vsnip-select-text)
-xmap        s   <Plug>(vsnip-select-text)
-nmap        S   <Plug>(vsnip-cut-text)
-xmap        S   <Plug>(vsnip-cut-text)
