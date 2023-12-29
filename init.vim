@@ -41,8 +41,9 @@ Plug 'dstein64/vim-startuptime'
 " GTA STUFF
 Plug 'tibabit/vim-templates'
 Plug 'Eandrju/cellular-automaton.nvim'
+Plug 'goolord/alpha-nvim'
+Plug 'nvim-tree/nvim-web-devicons'
 call plug#end()
-
 " Load files for Lsp and completion
 "luafile ~/.config/nvim/lua/compe-config.lua
 luafile ~/.config/nvim/lua/languages/languages.lua
@@ -103,6 +104,7 @@ nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 
 lua require'nvim-treesitter.configs'.setup { indent = { enable = true }, highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
+lua require'alpha'.setup(require'alpha.themes.dashboard'.config)
 "lua require('telescope').load_extension('fzf')
 " Telescope Setup
 "nnoremap <leader>h <cmd>Telescope find_files<cr>
